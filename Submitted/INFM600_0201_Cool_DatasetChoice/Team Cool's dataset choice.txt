@@ -1,0 +1,19 @@
+Hi everyone,
+
+Please find below the priority list and the questions.
+ 
+1.Energy Production & Changing Energy Sources (8 sources + UN Energy Statistics Database)
+    a.Is there a correlation between the global energy supply and demand? Case study for the following energy sources: Oil.
+    b.This dataset can be pared with the World development index data set to address the following question: What is the relation between the level of development of a country and its corresponding energy needs? 
+
+2.DC Metro Crime Rates
+    a.Can we establish a direct link between the type of weapons used and the severity of a crime?
+    b.In order to allocate crime fighting resources more appropriately, what types of crimes are more likely at any given time of the year? (broken down by different seasons)
+
+3. World Development Report 2014
+
+4. Mashable Online News Popularity
+
+
+Thanks & Regards
+Team Cool
