@@ -1,0 +1,275 @@
+---
+Group: Cool
+title: "R plot draft"
+output: html_notebook
+---
+
+
+---
+Topic: "Region Correlation of Production and Comsumption"
+---
+
+These 7 region plots show the trend of consumption and production of 7 regions from 1980 to 2013. From these plots, we have an overall conception of each region's correlation between consumption and production. Generally, 7 regions all had increased their consumption and production, and each region' own correlation of consumption and production was relative stable. 
+
+Europe had a high consumption but they could not supply themselves. Therefore, it needed input energy from the region like Africa or Middle East which had a surplus of energy. Asia and Oceania region had increased their consumption and production largely. We may infer that they had developed rapidly during this period especially from 2000 to 2013.
+
+
+```{r region}
+
+#Africa region
+Consumption_region<-read.csv("Consumption_region.csv")
+Production_region<-read.csv("Production_region.csv")
+#use xaxt="n" to delete the general form of x axis. lab can set the interval number calibration 
+plot(Consumption_region$Africa,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Production_region$Africa)+2), main = "Africa")
+lines(Production_region$Africa, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("topleft",legend=c("Consumption_Region_Africa","Production_Region_Africa"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+
+#Asia and Oceania
+plot(Consumption_region$Asia.Oceania,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Consumption_region$Asia.Oceania)+2), main = "Asia and Oceania")
+lines(Production_region$Asia...Oceania, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("topleft",legend=c("Consumption_Region_Asia and Oceania","Production_Region_Asia and Oceania"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+
+#Central and South America
+plot(Consumption_region$Central.South.America,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Production_region$Central...South.America)+2), main = "Central South America")
+lines(Production_region$Central...South.America, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("bottomright",legend=c("Consumption_Region_Central and South America","Production_Region_Central and South America"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+#Eurasia
+plot(Consumption_region$Eurasia,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Production_region$Eurasia)+2), main = "Eurasia")
+lines(Production_region$Eurasia, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("bottomright",legend=c("Consumption_Region_Eurasia","Production_Region_Eurasia"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+#Europe
+plot(Consumption_region$Europe,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Consumption_region$Europe)+2), main = "Europe")
+lines(Production_region$Europe, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("bottomright",legend=c("Consumption_Region_Europe","Production_Region_Europe"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+#Middle East
+plot(Consumption_region$Middle.East,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Production_region$Middle.East)+2), main = "Middle East")
+lines(Production_region$Middle.East, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("topleft",legend=c("Consumption_Region_Middle East","Production_Region_Middle East"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+
+
+#North America
+plot(Consumption_region$North.America,xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(Consumption_region$North.America)+2), main = "North America")
+lines(Production_region$North.America, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+legend("bottomright",legend=c("Consumption_Region_North America","Production_Region_North America"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+```
+
+
+---
+Topic: "World's the energy deficit/consumtion vs production"
+---
+
+The figures below are a representation of world's the energy deficit/consumtion vs production. The different countries have been grouped into 3 different categories: developing economies, transition economies and developed economies.
+
+Further adjustements had to be made to the underlying data in order to plot the graphs. Within the developed countried category for example, some countries present in the consumtion data were missing from the production data due to lack of data availability. Therefore they were remved from the consumption data so that we have the same number of countries for plotting.
+
+Following categories were adjusted:
+  Removed from developed countries consumption classification:
+    Gilbratar 
+    Bermuda
+    Greenland
+    Saint Pierre and Miquelon
+    
+  Removed from developing countries consumption classification:
+    Djibouti
+    Gambia
+    Guinea-Bissau
+    Saint Helena
+    Seychelles
+    Western Sahara
+    Macau
+    Palestinian Territories
+    American Samoa
+    Guam
+    Kiribati
+    Nauru
+    Niue
+    Solomon Islands
+    Tonga
+    Vanuatu
+    Antigua and Barbuda
+    Bahamas
+    British Virgin Islands
+    Cayman Islands
+    Grenada
+    Montserrat
+    Saint Kitts and Nevis
+    Saint Lucia
+    Turks and Caicos Islands
+  
+
+Below is the plot of production vs consumption of countries with a transition economy from 1980 to 2011 and the total energy deficit computer by substracting the consumption from the production:
+```{r}
+trans <- read.csv("Transition_Economies_Prod_minus_Cons.csv")
+plot(trans$Prod,xaxt="n", lab=c(34,8,5),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(trans$Prod)+2), main = "Transition Economies Energy Production vs Consumption")
+axis(1,at=c(1:32),labels=c(1980:2011))
+lines(trans$Cons, type = "o", col = "blue" )
+legend("bottomright",legend=c("Production","Comsumption"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+```
+
+```{r}
+trans <- read.csv("Transition_Economies_Prod_minus_Cons.csv")
+plot(trans$Diff,xaxt="n", lab=c(32,5,5),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(min(trans$Diff),max(trans$Diff)+2), main = "Transition Economies Energy Deficit")
+axis(1,at=c(1:32),labels=c(1980:2011))
+grid(nx=NA,ny=NULL)
+```
+
+
+
+As it is showned, those countries produce more energy than they consume. A logical conclusion would be that they export the surplus energy. Analysing the data in this category reveals that Russia's output and input stands out. If we remove Russia from the dataset, we get the following:
+
+```{r}
+transRuss <- read.csv("Transition_Economies_Sans_Russie_Prod_minus_Cons.csv")
+plot(transRuss$Prod,xaxt="n", lab=c(34,5,10),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(transRuss$Prod)+2), main = "Transition Economies Prod vs Cons without Russia")
+axis(1,at=c(1:32),labels=c(1980:2011))
+lines(transRuss$Cons, type = "o", col = "blue" )
+legend("bottomright",legend=c("Production","Comsumption"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+```
+
+
+```{r}
+transRuss <- read.csv("Transition_Economies_Sans_Russie_Prod_minus_Cons.csv")
+plot(transRuss$Diff,xaxt="n", lab=c(32,5,5),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(min(transRuss$Diff),max(transRuss$Diff)+2), main = "Transition Economies Energy Deficit without Russia")
+axis(1,at=c(1:32),labels=c(1980:2011))
+grid(nx=NA,ny=NULL)
+```
+
+
+We can see that Russia has a huge impact in this group especally before the 90's where there was virtually no energy acivity. This is due to the fact that before that period, all other countries in this group had either no significant energy activity or unavailable data. The Soviet Union which was suceeded by Russia was carrying all the load until its dissolution after the early 90's. Also with Russia out of the picture we can see that from and after the early 90's, the other countries were not balanced well between their consumption and production. The deficit was negative until the early 2000's where it began to pick up the pace and stay positive.
+
+
+Below are the energy needs for countries with developing economies:
+```{r}
+developing <- read.csv("Developing_Economies_Deficit.csv")
+plot(developing$Prod,xaxt="n", lab=c(5,5,10),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(developing$Prod)+2), main = "Developing Economies Energy Prod vs Cons")
+lines(developing$Cons, type = "o", col = "blue" )
+axis(1,at=c(1:34),labels=c(1980:2013))
+grid(nx=NA,ny=NULL)
+legend("bottomright",legend=c("Production","Consumption"),col=c("red","blue"),pch=c(21,21),lty=1)
+```
+
+
+```{r}
+developing <- read.csv("Developing_Economies_Deficit.csv")
+plot(developing$Diff,xaxt="n", lab=c(5,5,10),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(min(developing$Diff)-10,max(developing$Diff)+10), main = "Developing Economies Deficit")
+axis(1,at=c(1:34),labels=c(1980:2013))
+grid(nx=NA,ny=NULL)
+```
+
+One thing that stands out about the developing economies is that they produce and consume far more energy that the transitioning economies. This might be due to the fact that while they are in the developing stages, they require a lot of energy to sustain their development at least to the point where they can beging to transition their type of economies. 
+This is the early stage of development of a country where a lot of manufacturing and activities requiring a lot of energy  happen. What is rather counter intuitive is the fact that they produce more than they consume. One would assume that at this stage, their consumption needs would surpass their output. This can be explained by teh fact that a lot of these developing countries are major oil producers, therefore there is plenty left to export.
+
+
+The following graphs show how the developed economies mesure with the rest of the world with respect to their energy needs:
+```{r}
+developed <- read.csv("Developed_Economies_Deficit.csv")
+plot(developed$Prod,xaxt="n", lab=c(5,5,10),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(0,max(developed$Prod)+70), main = "Developed Economies Prod vs Cons")
+axis(1,at=c(1:34),labels=c(1980:2013))
+lines(developed$Cons, type = "o", col = "blue" )
+legend("bottomright",legend=c("Production","Consumption"),col=c("red","blue"),pch=c(21,21),lty=1)
+grid(nx=NA,ny=NULL)
+```
+
+```{r}
+developed <- read.csv("Developed_Economies_Deficit.csv")
+plot(developed$Diff,xaxt="n", lab=c(5,5,10),type = "o",col = "red", xlab = "Year", ylab = "Quadrillion Btu", ylim=c(min(developed$Diff)-10,max(developed$Diff)+10), main = "Developed Economies Deficit")
+axis(1,at=c(1:34),labels=c(1980:2013))
+grid(nx=NA,ny=NULL)
+
+```
+
+Developed economies as a group produce far less energy than their needs.Their consumption needs is also why they lead the world in polution.
+
+
+
+---
+Topic: "Iran-Iraq War"
+---
+
+
+1.
+Iran Production
+
+The below graph represents the Energy Production of Iraq. The X-axis represents the years from 1980 to 2013. The Y-axis represents the Energy Production of Iraq in Quadrillion Btu units. The shaded region denotes the years during which the Iran-Iraq war was fought.
+
+```{r}
+w <- read.csv("Wars.csv")
+plot(w$Iran_P, xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Iran (Energy Production)")
+
+axis(1,at=c(1:34),labels=c(1980:2013))
+
+rect(1,0,9,20,density=20,col="blue")
+
+legend("bottomright", legend=c("Iran-Iraq War"), fill=c("blue"), density=c(20), bty="n")
+
+```
+
+2.Iran Consumption
+
+The below graph represents the Energy Consumption of Iran. The X-axis represents the years from 1980 to 2013. The Y-axis represents the Energy Consumption of Iran in Quadrillion Btu units. The shaded region denotes the years during which the Iran-Iraq war was fought.
+
+```{r}
+w <- read.csv("Wars.csv")
+plot(w$Iran_C, xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Iran (Energy Consumption)")
+
+axis(1,at=c(1:34),labels=c(1980:2013))
+
+rect(1,0,9,20,density=20,col="blue")
+
+legend("bottomright", legend=c("Iran-Iraq War"), fill=c("blue"), density=c(20), bty="n")
+```
+
+
+3. Iraq Production
+
+The below graph represents the Energy Production of Iraq. The X-axis represents the years from 1980 to 2013. The Y-axis represents the Energy Production of Iraq in Quadrillion Btu units. The shaded region denotes the years during which the Iran-Iraq War was fought.
+
+```{r}
+w <- read.csv("Wars.csv")
+plot(w$Iraq_P, xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Iraq (Energy Production)")
+
+axis(1,at=c(1:34),labels=c(1980:2013))
+
+rect(1,0,9,20,density=20,col="blue")
+
+legend("bottomright", legend=c("Iran-Iraq War"), fill=c("blue"), density=c(20), bty="n")
+```
+
+4. Iraq Consumption
+
+The below graph represents the Energy Consumption of Iraq. The X-axis represents the years from 1980 to 2013. The Y-axis represents the Energy Consumption of Iraq in Quadrillion Btu units. The shaded region denotes the years during which the Iran-Iraq War was fought.
+
+```{r}
+w <- read.csv("Wars.csv")
+plot(w$Iraq_C, xaxt="n", lab=c(34,8,12),type = "o",col = "red", xlab = "Year", ylab = "Iraq (Energy Consumption)")
+
+axis(1,at=c(1:34),labels=c(1980:2013))
+
+rect(1,0,9,20,density=20,col="blue")
+
+legend("bottomright", legend=c("Iran-Iraq War"), fill=c("blue"), density=c(20), bty="n")
+```
+
+
+
+
